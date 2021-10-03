@@ -327,7 +327,7 @@ console.log(chalk.green(`Rules for the game!
 1. There are 10 questions! For each question you get +1 points and for a wrong answer you get -1, 
 2. Press a/b/c/d for the answers without hitting Enter! 
 (Any other key will be counted as wrong and -1 will be deducted from overall score!)
-3. You can go to Level 2 if you get minimum of 8 (which is the high score for L-1) points in Level1 Quiz. (Currently we have Level-2 only for NARUTO)
+3. You can go to Level 2 if you get minimum of 4 (which is the high score for L-1) points in Level1 Quiz. (Currently we have Level-2 only for NARUTO)
 4. Press 0 to exit. \n`));
 
 const choice = readlineSync.keyIn('Choose Your Topic : 1.Naruto 2.Demon Slayer!  \n');
@@ -335,7 +335,7 @@ const choice = readlineSync.keyIn('Choose Your Topic : 1.Naruto 2.Demon Slayer! 
 switch(choice){
   case '1': console.log(chalk.red.bold("Let's check if you are a SHINOBI!"));
            loopPlay(narutoQuiz);
-           if(score >= 8){
+           if(score >= 4){
              console.log(chalk.bold.blueBright(`Congratulations! ${userName}... \n
              Welcome to Level-2 (It's going to be difficult!)`));
              loopPlay(narutoQuiz2);
@@ -349,17 +349,22 @@ switch(choice){
 
 console.log(`Hey! Good Job ${userName}! Your score is ${score}`);
 
-let maxPoint = 0, lastUser = "";
+let maxPoint = 0, lastUser = "", hasHighscore = false;
 
 for(let i=0; i < scoreArray.length; i++){
    if(scoreArray[i].points > maxPoint){
+     hasHighscore = true;
      maxPoint = scoreArray[i].points;
      lastUser = scoreArray[i].contestant;
    }
 }
 
-if(score > maxPoint){
+if(hasHighscore){
+  if(score > maxPoint){
   console.log(chalk.green(`Congratulations! You beat the highscore of ${lastUser}->${maxPoint} by ${score-maxPoint}`));
-}
+}else{
+console.log(chalk.red(`Sorry! :( You did not  beat the highscore of ${lastUser} -> ${maxPoint}`));
+ }
+} 
 
 console.log("--------------------");

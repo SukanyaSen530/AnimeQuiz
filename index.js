@@ -339,6 +339,8 @@ switch(choice){
              console.log(chalk.bold.blueBright(`Congratulations! ${userName}... \n
              Welcome to Level-2 (It's going to be difficult!)`));
              loopPlay(narutoQuiz2);
+           }else{
+             console.log(chalk.red.bold(`Sorry :( You could not be promoted to Level-2, your score is ${score}! Try Again!`));
            }
            break;
   case '2': console.log(chalk.red.bold("Let's check if you are a DEMONSLAYER!"));
